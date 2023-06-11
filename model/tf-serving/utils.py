@@ -55,7 +55,3 @@ def predict_top_classes(image_path):
     predicted_labels = [class_indices[i] for i in predicted_class_indices]
 
     return predicted_labels
-
-image_path = 'lemon.jpg'
-predicted_classes = predict_top_classes(image_path)
-print('Top three predicted classes:', predicted_classes)
