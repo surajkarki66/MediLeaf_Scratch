@@ -2,6 +2,9 @@ import requests
 import json
 import numpy as np
 from tensorflow.keras.preprocessing import image
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
 
 def predict_top_classes(image_path):
     url = 'http://localhost:8601/v1/models/vgg_model:predict'
@@ -51,7 +54,20 @@ def predict_top_classes(image_path):
     29: 'Tulsi - Scientific name: Ocimum tenuiflorum'
 }
 
-    
     predicted_labels = [class_indices[i] for i in predicted_class_indices]
 
     return predicted_labels
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    if 'image' not in request.files:
+        return jsonify({'error': 'No image found in the request'})
+
+    image_file = request.files['image']
+    image_file.save('input_image.jpg')
+
+    predicted_classes = predict_top_classes('input_image.jpg')
+    return jsonify({'predictions': predicted_classes})
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
