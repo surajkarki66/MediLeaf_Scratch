@@ -1,0 +1,2 @@
+tensorflow_model_server --rest_api_port=8601 --model_name=vgg_model --model_base_path=/tf-serving/model/
+

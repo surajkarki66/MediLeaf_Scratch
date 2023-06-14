@@ -19,39 +19,44 @@ def predict_top_classes(image_path):
     predicted_class_indices = np.argsort(predictions[0])[::-1][:3]
 
     class_indices = {
-    0: 'Arive-Dantu',
-    1: 'Basale',
-    2: 'Betel',
-    3: 'Crape_Jasmine',
-    4: 'Curry',
-    5: 'Drumstick',
-    6: 'Fenugreek',
-    7: 'Guava',
-    8: 'Hibiscus',
-    9: 'Indian_Beech',
-    10: 'Indian_Mustard',
-    11: 'Jackfruit',
-    12: 'Jamaica_Cherry-Gasagase',
-    13: 'Jamun',
-    14: 'Jasmine',
-    15: 'Karanda',
-    16: 'Lemon',
-    17: 'Mango',
-    18: 'Mexican_Mint',
-    19: 'Mint',
-    20: 'Neem',
-    21: 'Oleander',
-    22: 'Parijata',
-    23: 'Peepal',
-    24: 'Pomegranate',
-    25: 'Rasna',
-    26: 'Rose_apple',
-    27: 'Roxburgh_fig',
-    28: 'Sandalwood',
-    29: 'Tulsi'
+    0: 'Amaranthus Viridis',
+    1: 'Basella Alba',
+    2: 'Piper Betle',
+    3: 'Tabernaemontana Divaricata',
+    4: 'Murraya Koenigii',
+    5: 'Moringa Oleifera',
+    6: 'Trigonella Foenum-graecum',
+    7: 'Psidium Guajava',
+    8: 'Hibiscus Rosa-sinensis',
+    9: 'Pongamia Pinnata',
+    10: 'Brassica Juncea',
+    11: 'Artocarpus Heterophyllus',
+    12: 'Muntingia Calabura',
+    13: 'Syzygium Cumini',
+    14: 'Jasminum',
+    15: 'Carissa Carandas',
+    16: 'Citrus Limon',
+    17: 'Mangifera Indica',
+    18: 'Plectranthus Amboinicus',
+    19: 'Mentha',
+    20: 'Azadirachta Indica',
+    21: 'Nerium Oleander',
+    22: 'Nyctanthes Arbor-tristis',
+    23: 'Ficus Religiosa',
+    24: 'Punica Granatum',
+    25: 'Alpinia Galanga',
+    26: 'Syzygium Jambos',
+    27: 'Ficus Auriculata',
+    28: 'Santalum Album',
+    29: 'Ocimum Tenuiflorum'
 }
+ 
+    predictions = predictions[0]
+    predicted_classes_with_probs = [
+        {"species": class_indices[i], "probability": float(predictions[i])}
+        for i in predicted_class_indices
+    ]
 
-    
-    predicted_labels = [class_indices[i] for i in predicted_class_indices]
+    prediction_response =  predicted_classes_with_probs
 
-    return predicted_labels
+    return prediction_response
